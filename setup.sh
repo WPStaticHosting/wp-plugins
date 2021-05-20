@@ -26,7 +26,7 @@ sudo /opt/bitnami/ctlscript.sh restart apache
 cd /opt/bitnami/apps/wordpress/htdocs
 
 # ADDING USER fazalfarhan01 AND DELETING DEFAULT
-wp user create fazalfarhan01 fazal.farhan@gmail.com --role=administrator --user_pass=$1
+wp user create fazalfarhan01 fazal.farhan@gmail.com --role=administrator --user_pass=$pswd
 wp user delete 1 --reassign=2
 
 # DEACTIVATE AND DELETE ALL PLUGINS
@@ -49,8 +49,8 @@ https://github.com/WPStaticHosting/wp-plugins/raw/main/unlimited-elements-for-el
 https://github.com/WPStaticHosting/wp-plugins/raw/main/formidable-pro_v4.10.03.zip --force --allow-root
 
 # CHANGE PERMISSIONS TO MAKE WRITEABLE
-sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs
-chmod 775 -R /opt/bitnami/apps/wordpress/htdocs
+sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/.
+sudo chmod 775 -R /opt/bitnami/apps/wordpress/htdocs/.
 
 # ACTIVATE ASTRA AND DELETE OTHER THEMES
 wp theme activate astra
