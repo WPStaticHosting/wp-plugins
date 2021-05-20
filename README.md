@@ -1,0 +1,1 @@
+# WP-Plugins for installation from wp-cli
