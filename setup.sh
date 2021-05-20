@@ -9,7 +9,7 @@ echo "Welcome $username!"
 read -p "Enter Blog Name: "  blogName
 
 sudo apt update
-sudo apt upgrade -y
+# sudo apt upgrade -y
 sudo apt install sed
 
 # ENABLE SSH
