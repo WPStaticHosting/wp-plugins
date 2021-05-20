@@ -1,3 +1,13 @@
+clear
+read -p "Enter WordPress username: "  username
+read -p "Enter WordPress admin e-mail: "  adminEmail
+read -s -p "Enter Password: " pswd
+
+clear
+echo "Welcome $username!"
+
+read -p "Enter Blog Name: "  blogName
+
 sudo apt update
 sudo apt upgrade -y
 sudo apt install sed
@@ -29,7 +39,7 @@ sudo wp theme install astra  --allow-root
 # INSTALL OTHER PLUGINS
 sudo wp plugin install all-in-one-wp-migration happy-elementor-addons \
 essential-addons-for-elementor-lite elementskit-lite astra-sites \
-envato-elements ele-custom-skin templately litespeed-cache \
+envato-elements ele-custom-skin templately litespeed-cache formidable \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/seo-by-rank-math.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/elementor/elementor.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/elementor/elementor-pro.zip \
@@ -38,8 +48,9 @@ https://github.com/WPStaticHosting/wp-plugins/raw/main/wp-mail-smtp-pro_v2.8.0.z
 https://github.com/WPStaticHosting/wp-plugins/raw/main/unlimited-elements-for-elementor-premium.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/formidable-pro_v4.10.03.zip --force --allow-root
 
-# CHANGE PERMISSIONS
-sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/wp-content
+# CHANGE PERMISSIONS TO MAKE WRITEABLE
+sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs
+chmod 775 -R /opt/bitnami/apps/wordpress/htdocs
 
 # ACTIVATE ASTRA AND DELETE OTHER THEMES
 wp theme activate astra
@@ -47,3 +58,8 @@ wp theme delete --all
 
 # ACTIVATE ALL PLUGINS
 wp plugin activate --all
+
+wp option update blogname "$blogName"
+wp option update admin_email "$adminEmail"
+
+wp option update timezone_string "Asia/Kolkata"
