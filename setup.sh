@@ -34,26 +34,38 @@ sudo wp user delete 1 --reassign=2
 
 # DEACTIVATE AND DELETE ALL PLUGINS
 sudo wp plugin deactivate --all
-sudo wp plugin delete $(wp plugin list --status=inactive --field=name)
+sudo wp plugin delete $(sudo wp plugin list --status=inactive --field=name)
+
+# DELETE ALL DEFAULT POSTS
+sudo wp post delete $(sudo wp post list --field=ID)
+
+# CHANGING PERMALINK STRUCTURE
+sudo wp rewrite structure /%postname%/
 
 # INSTALL ASTRA
-sudo wp theme install astra  --allow-root
+# sudo wp theme install astra --allow-root
+sudo wp theme install astra
+# WORKS WITHOUT --allow-root
 
 # INSTALL OTHER PLUGINS
 sudo wp plugin install all-in-one-wp-migration happy-elementor-addons \
 essential-addons-for-elementor-lite elementskit-lite astra-sites \
 envato-elements ele-custom-skin templately litespeed-cache formidable \
-https://github.com/WPStaticHosting/wp-plugins/raw/main/seo-by-rank-math.zip \
+https://github.com/WPStaticHosting/wp-plugins/raw/main/seo/seo-by-rank-math.zip \
+https://github.com/WPStaticHosting/wp-plugins/raw/main/seo/seo-by-rank-math-pro.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/elementor/elementor.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/elementor/elementor-pro.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/all-in-one-wp-migration-gdrive-extension.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/wp-mail-smtp-pro_v2.8.0.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/unlimited-elements-for-elementor-premium.zip \
-https://github.com/WPStaticHosting/wp-plugins/raw/main/formidable-pro_v4.10.03.zip --force --allow-root
+https://github.com/WPStaticHosting/wp-plugins/raw/main/formidable-pro_v4.10.03.zip --force
+# WORKS WITHOUT --allow-root
+
 
 # CHANGE PERMISSIONS TO MAKE WRITEABLE
 sudo chown -R bitnami:daemon /opt/bitnami/wordpress/.
 sudo chmod 775 -R /opt/bitnami/wordpress/.
+sudo chmod 775 -R /bitnami/wordpress
 
 # ACTIVATE ASTRA AND DELETE OTHER THEMES
 sudo wp theme activate astra
