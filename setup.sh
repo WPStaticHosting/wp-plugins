@@ -1,3 +1,5 @@
+# LAST UPDATED 2021-05-27
+
 clear
 read -p "Enter WordPress username: "  username
 read -p "Enter WordPress admin e-mail: "  adminEmail
@@ -20,18 +22,19 @@ sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/
 sudo systemctl restart ssh
 
 # DISABLE BITNAMI BANNER
-sudo /opt/bitnami/apps/wordpress/bnconfig --disable_banner 1
+# sudo /opt/bitnami/apps/wordpress/bnconfig --disable_banner 1
+# BANNER DISCONTINUED BY DEFAULT
 sudo /opt/bitnami/ctlscript.sh restart apache
 
-cd /opt/bitnami/apps/wordpress/htdocs
+cd /opt/bitnami/wordpress
 
 # ADDING USER fazalfarhan01 AND DELETING DEFAULT
-wp user create fazalfarhan01 fazal.farhan@gmail.com --role=administrator --user_pass=$pswd
-wp user delete 1 --reassign=2
+sudo wp user create fazalfarhan01 fazal.farhan@gmail.com --role=administrator --user_pass=$pswd
+sudo wp user delete 1 --reassign=2
 
 # DEACTIVATE AND DELETE ALL PLUGINS
-wp plugin deactivate --all
-wp plugin delete $(wp plugin list --status=inactive --field=name)
+sudo wp plugin deactivate --all
+sudo wp plugin delete $(wp plugin list --status=inactive --field=name)
 
 # INSTALL ASTRA
 sudo wp theme install astra  --allow-root
@@ -49,17 +52,17 @@ https://github.com/WPStaticHosting/wp-plugins/raw/main/unlimited-elements-for-el
 https://github.com/WPStaticHosting/wp-plugins/raw/main/formidable-pro_v4.10.03.zip --force --allow-root
 
 # CHANGE PERMISSIONS TO MAKE WRITEABLE
-sudo chown -R bitnami:daemon /opt/bitnami/apps/wordpress/htdocs/.
-sudo chmod 775 -R /opt/bitnami/apps/wordpress/htdocs/.
+sudo chown -R bitnami:daemon /opt/bitnami/wordpress/.
+sudo chmod 775 -R /opt/bitnami/wordpress/.
 
 # ACTIVATE ASTRA AND DELETE OTHER THEMES
-wp theme activate astra
-wp theme delete --all
+sudo wp theme activate astra
+sudo wp theme delete --all
 
 # ACTIVATE ALL PLUGINS
-wp plugin activate --all
+sudo wp plugin activate --all
 
-wp option update blogname "$blogName"
-wp option update admin_email "$adminEmail"
+sudo wp option update blogname "$blogName"
+sudo wp option update admin_email "$adminEmail"
 
-wp option update timezone_string "Asia/Kolkata"
+sudo wp option update timezone_string "Asia/Kolkata"
