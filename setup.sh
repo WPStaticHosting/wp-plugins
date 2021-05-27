@@ -58,6 +58,7 @@ https://github.com/WPStaticHosting/wp-plugins/raw/main/elementor/elementor-pro.z
 https://github.com/WPStaticHosting/wp-plugins/raw/main/all-in-one-wp-migration-gdrive-extension.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/wp-mail-smtp-pro_v2.8.0.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/unlimited-elements-for-elementor-premium.zip \
+https://github.com/WPStaticHosting/wp-plugins/raw/main/essential-addons-elementor_v4.4.0.zip \
 https://github.com/WPStaticHosting/wp-plugins/raw/main/formidable-pro_v4.10.03.zip --force
 # WORKS WITHOUT --allow-root
 
